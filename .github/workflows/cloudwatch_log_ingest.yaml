@@ -24,14 +24,16 @@ jobs:
       - uses: actions/checkout@v4
       - name: Install Packages
         run: python -m pip install "waves/aws/cloudwatch_log_ingest[dev,test]"
+      - name: cd 
+        run: cd waves/aws/cloudwatch_log_ingest
       - name: Lint
-        run: ruff check waves/aws/cloudwatch_log_ingest
+        run: ruff check .
       - name: Formatting
-        run: ruff format waves/aws/cloudwatch_log_ingest --check
+        run: ruff format . --check
       - name: Type Check
-        run: mypy waves/aws/cloudwatch_log_ingest
+        run: mypy . 
       - name: Unit Testing
-        run: pytest waves/aws/cloudwatch_log_ingest/tests/unit
+        run: pytest tests/unit
 
   Build_Cloudwatch_Lambda_Image_Test_Inside:
     name: "Build Cloudwatch Lambda Image"

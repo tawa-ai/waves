@@ -55,6 +55,9 @@ show_error_codes = true
 implicit_optional = false
 warn_return_any = false
 warn_unused_ignores = true
+exclude = [
+    'build$',  # but TOML's single-quoted strings do not
+]
 
 [[tool.mypy.overrides]]
 # Ignore external packages that are not typed.
