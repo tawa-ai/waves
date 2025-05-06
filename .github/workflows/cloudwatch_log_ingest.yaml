@@ -35,7 +35,7 @@ jobs:
           mypy --exclude build .
       - name: Unit Testing
         run: |
-          ls
+          cd waves/aws/cloudwatch_log_ingest
           pytest tests/unit
 
   Build_Cloudwatch_Lambda_Image_Test_Inside:
