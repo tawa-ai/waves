@@ -1,0 +1,10 @@
+# allowlist rather than a denylist. * ignores everything
+*
+
+# Purposefully include docs so container is self documenting
+!CloudwatchLogIngest.md
+!cloudwatch_log_ingest/*
+!iam_federation
+!pyproject.toml
+!requirements
+!tests

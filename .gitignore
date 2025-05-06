@@ -1,0 +1,7 @@
+*book/*
+*build*
+*egg*
+*mypy_cache*
+*pycache*
+*pytest_cache*
+*ruff_cache*
