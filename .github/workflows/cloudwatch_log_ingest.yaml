@@ -31,7 +31,9 @@ jobs:
       - name: Formatting
         run: ruff format . --check
       - name: Type Check
-        run: mypy . 
+        run: |
+          rm -rf build
+          mypy . 
       - name: Unit Testing
         run: pytest tests/unit
 
