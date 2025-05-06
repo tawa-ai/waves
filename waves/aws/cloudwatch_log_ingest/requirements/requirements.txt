@@ -1,0 +1,2 @@
+aws-lambda-typing==2.20.0
+google-cloud-logging==3.11.3

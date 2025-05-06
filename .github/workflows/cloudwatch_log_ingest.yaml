@@ -1,0 +1,64 @@
+name: "Cloudwatch Log Ingest"
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'waves/aws/cloudwatch_log_ingest/**/*'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'waves/aws/cloudwatch_log_ingest/**/*'
+
+# Cancel existing runs when new jobs are spawned from the same branch, excepting master.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+
+jobs: 
+  Lint_Type_Check_CloudWatch_Log_Ingest:
+    name: "Lint, Format, Test, & Type Check Cloudwatch Log Ingest"
+    runs-on: ubuntu-24.04 
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Packages
+        run: python -m pip install "waves/aws/cloudwatch_log_ingest[dev,test]"
+      - name: cd 
+        run: cd waves/aws/cloudwatch_log_ingest
+      - name: Lint
+        run: ruff check .
+      - name: Formatting
+        run: ruff format . --check
+      - name: Type Check
+        run: |
+          mypy --exclude build .
+      - name: Unit Testing
+        run: |
+          cd waves/aws/cloudwatch_log_ingest
+          pytest tests/unit
+
+  Build_Cloudwatch_Lambda_Image_Test_Inside:
+    name: "Build Cloudwatch Lambda Image"
+    runs-on: ubuntu-24.04 
+    needs: [Lint_Type_Check_CloudWatch_Log_Ingest]
+    steps:
+      - uses: actions/checkout@v4
+      - name: CD to Sub Module
+        run: cd waves/aws/cloudwatch_log_ingest
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+        with:
+          driver: docker # defaults to "docker-containerized" need just docker for local testing
+      - name: Build Image
+        uses: docker/build-push-action@v6
+        with:
+          context: waves/aws/cloudwatch_log_ingest
+          provenance: false
+          tags: cloudwatch_log_ingest:ci_testing
+          target: test
+          push: false
+      - name: Run Testing on Image
+        run: |
+          docker run cloudwatch_log_ingest:ci_testing
+
