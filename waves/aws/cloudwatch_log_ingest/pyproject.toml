@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "cloudwatch_log_ingest"
 authors = [{name = "Max Weirz", email ="weirzmax@gmail.com"}]
 version = "0.1.0"
-requires-python = ">=3.10"
+requires-python = ">=3.8"
 dynamic = ["dependencies", "optional-dependencies"]
 
 [tool.setuptools]
