@@ -32,8 +32,7 @@ jobs:
         run: ruff format . --check
       - name: Type Check
         run: |
-          rm -rf build
-          mypy . 
+          mypy . --explicit-package-bases
       - name: Unit Testing
         run: pytest tests/unit
 
