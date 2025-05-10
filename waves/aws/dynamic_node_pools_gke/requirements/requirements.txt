@@ -1,0 +1,4 @@
+aws-lambda-typing==2.20.0
+dacite
+google-cloud-logging==3.11.3
+templafirm>=0.0.13,<1
