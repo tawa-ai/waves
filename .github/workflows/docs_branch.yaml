@@ -27,6 +27,6 @@ jobs:
         run: |
           cargo install --version ${MDBOOK_VERSION} mdbook
       - name: Build with Sphinx
-        run: sphinx-build -M html docs/source/ docs/source/api
+        run: sphinx-build -M html docs/src/ docs/src/api
       - name: Build with mdBook
         run: mdbook build docs
