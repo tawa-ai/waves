@@ -1,0 +1,1 @@
+../../waves/aws/dynamic_node_pools_gke/DynamicNodePoolsGke.md
