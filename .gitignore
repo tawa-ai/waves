@@ -1,5 +1,5 @@
-*book/*
-*build/*
+docs/book/*
+docs/build/*
 *egg*
 *mypy_cache*
 *pycache*
