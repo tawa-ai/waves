@@ -13,4 +13,4 @@
 
 ## Api Docs
 
-- [Api](./api-html/index.html)
+- [Api](./html/index.html)
